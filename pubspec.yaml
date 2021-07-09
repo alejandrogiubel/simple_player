@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   get: ^4.1.4
   audioplayers: ^0.19.1
+  audio_service: ^0.17.1
   solid_bottom_sheet: ^0.1.10
 
 

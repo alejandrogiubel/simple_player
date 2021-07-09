@@ -9,33 +9,29 @@ class PlayerPage extends GetView<PlayerController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Player')),
-        body: getBody(),
-        bottomSheet: Obx(() {
-          return SimplePlayer(
-            question: Get.find<GlobalController>().questionPlaying.value,
-            audioCache: controller.audioCache,
-          );
-        })
+      appBar: AppBar(title: Text('Player')),
+      body: getBody(),
+      bottomSheet:SimplePlayer(
+        audioCache: controller.audioCache,
+      )
     );
   }
 
   getBody() {
     return Obx(() {
       return Visibility(
-        visible: controller.questions.isNotEmpty,
+        visible: Get.find<GlobalController>().questions.isNotEmpty,
         child: ListView.builder(
-            itemCount: controller.questions.length,
-            itemBuilder: (_, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 10, vertical: 5),
-                child: QuestionWidget(
-                  question: controller.questions[index],
-                  audioCache: controller.audioCache,
-                ),
-              );
-            }
+          itemCount: Get.find<GlobalController>().questions.length,
+          itemBuilder: (_, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: QuestionWidget(
+                question: Get.find<GlobalController>().questions[index],
+                audioCache: controller.audioCache,
+              ),
+            );
+          }
         ),
         replacement: Center(
           child: CircularProgressIndicator.adaptive(),

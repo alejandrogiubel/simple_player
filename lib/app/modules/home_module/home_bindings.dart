@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => GlobalController(), fenix: true);
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => ApiProvider(), fenix: true);
   }

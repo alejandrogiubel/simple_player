@@ -21,7 +21,7 @@ class QuestionWidget extends GetWidget<QuestionWidgetController> {
     return Obx(() {
       return AnimatedContainer(
         decoration: BoxDecoration(
-          color: controller.isPlaying.value ? Colors.pinkAccent : Colors.grey[200],
+          color: question.nro == Get.find<GlobalController>().questionPlaying.value.nro ? Colors.pinkAccent : Colors.grey[200],
           borderRadius: BorderRadius.circular(10)
         ),
         padding: const EdgeInsets.all(10),
@@ -30,13 +30,13 @@ class QuestionWidget extends GetWidget<QuestionWidgetController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Question number: ' + question.nro.toString(),
-              style: controller.isPlaying.value ? controller.onPlayTextStyle : controller.onPauseTextStyle,
+              style: question.nro == Get.find<GlobalController>().questionPlaying.value.nro ? controller.onPlayTextStyle : controller.onPauseTextStyle,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(child: Text(question.labels[0].text,
-                  style: controller.isPlaying.value ? controller.onPlayTextStyle : controller.onPauseTextStyle,
+                  style: question.nro == Get.find<GlobalController>().questionPlaying.value.nro ? controller.onPlayTextStyle : controller.onPauseTextStyle,
                 ),),
                 Material(
                   color: Colors.transparent,
@@ -45,7 +45,8 @@ class QuestionWidget extends GetWidget<QuestionWidgetController> {
                     icon: Icon(Icons.play_circle_fill),
                     onPressed: () {
                       if (question.labels[0].hasAudio) {
-                        controller.playLocal(question, audioCache);
+                        // controller.playLocal(question, audioCache);
+                        controller.playWithService(question);
                       } else {
                         Get.snackbar('Error', 'No se encontró el recurso');
                       }
